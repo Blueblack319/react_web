@@ -15,24 +15,24 @@ class FullPost extends Component {
         (this.state.loadedPost &&
           this.state.loadedPost.id !== this.props.selectedId)
       ) {
-        axios
-          .get(
+        axios({
+          method: "get",
+          url:
             "https://jsonplaceholder.typicode.com/posts/" +
-              this.props.selectedId
-          )
-          .then((response) => {
-            this.setState({ loadedPost: response.data });
-          });
+            this.props.selectedId,
+        }).then((response) => {
+          this.setState({ loadedPost: response.data });
+        });
       }
     }
   };
 
   handleDeletePost = () => {
-    axios
-      .delete(
-        "https://jsonplaceholder.typicode.com/posts/" + this.props.selectedId
-      )
-      .then((response) => console.log(response));
+    axios({
+      method: "delete",
+      url:
+        "https://jsonplaceholder.typicode.com/posts/" + this.props.selectedId,
+    }).then((response) => console.log(response));
   };
 
   render() {
