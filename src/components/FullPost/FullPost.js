@@ -17,9 +17,7 @@ class FullPost extends Component {
       ) {
         axios({
           method: "get",
-          url:
-            "https://jsonplaceholder.typicode.com/posts/" +
-            this.props.selectedId,
+          url: "/posts/" + this.props.selectedId,
         }).then((response) => {
           this.setState({ loadedPost: response.data });
         });
@@ -30,8 +28,7 @@ class FullPost extends Component {
   handleDeletePost = () => {
     axios({
       method: "delete",
-      url:
-        "https://jsonplaceholder.typicode.com/posts/" + this.props.selectedId,
+      url: "/posts/" + this.props.selectedId,
     }).then((response) => console.log(response));
   };
 
