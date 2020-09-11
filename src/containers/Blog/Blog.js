@@ -5,7 +5,7 @@ import FullPost from "../../components/FullPost/FullPost";
 import NewPost from "../../components/NewPost/NewPost";
 import "./Blog.css";
 
-import axios from "axios";
+import { instance } from "../../axios";
 
 class Blog extends Component {
   state = {
@@ -14,7 +14,7 @@ class Blog extends Component {
     error: false,
   };
   componentDidMount = () => {
-    axios({
+    instance({
       method: "get",
       url: "/posts",
     })
