@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 import "../Posts/Posts.module.css";
 
@@ -32,18 +32,24 @@ class Posts extends Component {
       });
   };
 
+  handlePostSelected = (id) => {
+    this.props.history.push("/" + id);
+  };
+
   render() {
     let posts = <p style={{ textAlign: "center" }}>Something went wrong!!</p>;
     if (!this.state.error) {
       posts = this.state.posts.map((post) => {
         return (
-          <Link to={this.props.match.url + post.id} key={post.id}>
-            <Post
-              title={post.title}
-              author={post.author}
-              // {...this.props}
-            />
-          </Link>
+          // <Link to={this.props.match.url + post.id} key={post.id}>
+          <Post
+            title={post.title}
+            author={post.author}
+            key={post.id}
+            clicked={this.handlePostSelected.bind(this, post.id)}
+            // {...this.props}
+          />
+          // </Link>
         );
       });
     }
@@ -51,4 +57,4 @@ class Posts extends Component {
   }
 }
 
-export default Posts;
+export default withRouter(Posts);
