@@ -1,56 +1,11 @@
 import React, { Component } from "react";
+import { Route } from "react-router";
 
-import Post from "../../components/Post/Post";
-import FullPost from "../FullPost/FullPost";
-import NewPost from "../NewPost/NewPost";
 import "./Blog.css";
-
-import { instance } from "../../axios";
+import Posts from "../Posts/Posts";
 
 class Blog extends Component {
-  state = {
-    posts: [],
-    selectedPost: null,
-    error: false,
-  };
-  componentDidMount = () => {
-    instance({
-      method: "get",
-      url: "/posts",
-    })
-      .then((response) => {
-        const posts = response.data.slice(0, 5);
-        const updatePosts = posts.map((post) => {
-          return {
-            ...post,
-            author: "Crazybirdz",
-          };
-        });
-        this.setState({ posts: updatePosts });
-      })
-      .catch((error) => {
-        this.setState({ error: true });
-        console.log(error);
-      });
-  };
-
-  handlePostSelected = (id) => {
-    this.setState({ selectedPost: id });
-  };
-
   render() {
-    let posts = <p style={{ textAlign: "center" }}>Something went wrong!!</p>;
-    if (!this.state.error) {
-      posts = this.state.posts.map((post) => {
-        return (
-          <Post
-            key={post.id}
-            title={post.title}
-            clicked={this.handlePostSelected.bind(this, post.id)}
-          />
-        );
-      });
-    }
     return (
       <div className="Blog">
         <header>
@@ -65,13 +20,8 @@ class Blog extends Component {
             </ul>
           </nav>
         </header>
-        <section className="Posts">{posts}</section>
-        <section>
-          <FullPost selectedId={this.state.selectedPost} />
-        </section>
-        <section>
-          <NewPost />
-        </section>
+        <Route path="/" render={() => <h1>Home</h1>} />
+        <Route path="/new-post" exact render={() => <h1>New Post</h1>} />
       </div>
     );
   }

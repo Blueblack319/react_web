@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const instance = axios.create({
+const instance = axios.create({
   baseURL: "https://jsonplaceholder.typicode.com",
 });
 
@@ -27,3 +27,5 @@ instance.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+export default instance;
