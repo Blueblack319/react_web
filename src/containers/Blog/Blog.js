@@ -4,7 +4,6 @@ import { Route, NavLink, withRouter, Switch } from "react-router-dom";
 import "./Blog.css";
 import Posts from "../Posts/Posts";
 import NewPost from "../Posts/NewPost/NewPost";
-import FullPost from "../Posts/FullPost/FullPost";
 
 class Blog extends Component {
   render() {
@@ -15,7 +14,7 @@ class Blog extends Component {
             <ul>
               <li>
                 <NavLink
-                  to="/"
+                  to="/posts/"
                   exact
                   activeClassName="home-active"
                   activeStyle={{
@@ -29,7 +28,7 @@ class Blog extends Component {
               <li>
                 <NavLink
                   to={{
-                    pathname: this.props.match.url + "new-post",
+                    pathname: "/new-post",
                     hash: "#submit",
                     search: "?quick-submit=true",
                   }}
@@ -43,10 +42,9 @@ class Blog extends Component {
         </header>
         {/* <Route path="/" render={() => <h1>Home</h1>} />
         <Route path="/new-post" exact render={() => <h1>New Post</h1>} /> */}
-        <Route path="/" exact component={Posts} />
         <Switch>
           <Route path="/new-post" exact component={NewPost} />
-          <Route path="/:id" component={FullPost} />
+          <Route path="/posts" component={Posts} />
         </Switch>
       </div>
     );
