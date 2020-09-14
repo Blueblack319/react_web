@@ -26,7 +26,7 @@ class Blog extends Component {
                     textDecoration: "underline",
                   }}
                 >
-                  Home
+                  Posts
                 </NavLink>
               </li>
               <li>
@@ -48,10 +48,11 @@ class Blog extends Component {
         <Route path="/new-post" exact render={() => <h1>New Post</h1>} /> */}
         <Switch>
           {this.state.auth ? (
-            <Route path="/new-post" exact component={NewPost} {...this.props} />
+            <Route path="/new-post" exact component={NewPost} />
           ) : null}
           <Route path="/posts" component={Posts} />
-          <Redirect from="/" to="/posts" />
+          <Route render={() => <h1>Not found</h1>} />
+          {/* <Redirect from="/" to="/posts" /> */}
           {/* <Route path="/" component={Posts} /> */}
         </Switch>
       </div>
