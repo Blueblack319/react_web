@@ -10,13 +10,22 @@ class FullPost extends Component {
     loadedPost: null,
   };
   componentDidMount = () => {
+    console.log(this.props);
+    this.loadPost();
+  };
+
+  componentDidUpdate = () => {
+    console.log(this.props);
+    this.loadPost();
+  };
+
+  loadPost = () => {
     if (this.props.match.params.id) {
       if (
         !this.state.loadedPost ||
         (this.state.loadedPost &&
-          this.state.loadedPost.id !== this.props.match.params.id)
+          this.state.loadedPost.id != this.props.match.params.id)
       ) {
-        console.log(this.state.loadedPost);
         axios({
           method: "get",
           url: "/posts/" + this.props.match.params.id,
@@ -30,7 +39,7 @@ class FullPost extends Component {
   handleDeletePost = () => {
     axios({
       method: "delete",
-      url: "/posts/" + this.props.selectedId,
+      url: "/posts/" + this.props.match.params.id,
     }).then((response) => console.log(response));
   };
 
