@@ -28,7 +28,8 @@ class NewPost extends Component {
       url: "/posts",
       data,
     }).then((response) => {
-      this.setState({ submitted: true });
+      // this.setState({ submitted: true });
+      this.props.history.push("/posts");
       console.log(response);
     });
   };
@@ -37,7 +38,7 @@ class NewPost extends Component {
     let redirect = null;
     return (
       <div className="NewPost">
-        {(redirect = this.state.submitted ? <Redirect to="/posts" /> : null)}
+        {/* {(redirect = this.state.submitted ? <Redirect to="/posts" /> : null)} */}
         <h1>Add a Post</h1>
         <label>Title</label>
         <input
