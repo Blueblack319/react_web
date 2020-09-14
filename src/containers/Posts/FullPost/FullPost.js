@@ -24,7 +24,7 @@ class FullPost extends Component {
       if (
         !this.state.loadedPost ||
         (this.state.loadedPost &&
-          this.state.loadedPost.id != this.props.match.params.id)
+          this.state.loadedPost.id !== +this.props.match.params.id)
       ) {
         axios({
           method: "get",
