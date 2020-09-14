@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import "../Posts/Posts.module.css";
 
@@ -11,7 +12,6 @@ class Posts extends Component {
   };
 
   componentDidMount = () => {
-    console.log(this.props);
     axios({
       method: "get",
       url: "/posts",
@@ -32,22 +32,18 @@ class Posts extends Component {
       });
   };
 
-  handlePostSelected = (id) => {
-    this.setState({ selectedPost: id });
-  };
-
   render() {
     let posts = <p style={{ textAlign: "center" }}>Something went wrong!!</p>;
     if (!this.state.error) {
       posts = this.state.posts.map((post) => {
         return (
-          <Post
-            key={post.id}
-            title={post.title}
-            author={post.author}
-            clicked={this.handlePostSelected.bind(this, post.id)}
-            // {...this.props}
-          />
+          <Link to={this.props.match.url + post.id} key={post.id}>
+            <Post
+              title={post.title}
+              author={post.author}
+              // {...this.props}
+            />
+          </Link>
         );
       });
     }

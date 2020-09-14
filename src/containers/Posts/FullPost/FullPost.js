@@ -3,21 +3,22 @@ import React, { Component } from "react";
 import "./FullPost.css";
 
 import axios from "axios";
+import { withRouter } from "react-router-dom";
 
 class FullPost extends Component {
   state = {
     loadedPost: null,
   };
-  componentDidUpdate = () => {
-    if (this.props.selectedId) {
+  componentDidMount = () => {
+    if (this.props.match.params.id) {
       if (
         !this.state.loadedPost ||
         (this.state.loadedPost &&
-          this.state.loadedPost.id !== this.props.selectedId)
+          this.state.loadedPost.id !== this.props.match.params.id)
       ) {
         axios({
           method: "get",
-          url: "/posts/" + this.props.selectedId,
+          url: "/posts/" + this.props.match.params.id,
         }).then((response) => {
           this.setState({ loadedPost: response.data });
         });
@@ -34,7 +35,7 @@ class FullPost extends Component {
 
   render() {
     let post = <p style={{ textAlign: "center" }}>Please select a Post!</p>;
-    if (this.props.selectedId) {
+    if (this.props.match.params.id) {
       post = <p style={{ textAlign: "center" }}>Loading...!</p>;
     }
     if (this.state.loadedPost) {
@@ -54,4 +55,4 @@ class FullPost extends Component {
   }
 }
 
-export default FullPost;
+export default withRouter(FullPost);
