@@ -11,6 +11,9 @@ class NewPost extends Component {
     author: "Max",
   };
 
+  componentDidMount() {
+    console.log(this.props);
+  }
   handleSendData = () => {
     const data = {
       title: this.state.title,

@@ -11,6 +11,7 @@ class Posts extends Component {
   };
 
   componentDidMount = () => {
+    console.log(this.props);
     axios({
       method: "get",
       url: "/posts",
@@ -43,7 +44,9 @@ class Posts extends Component {
           <Post
             key={post.id}
             title={post.title}
+            author={post.author}
             clicked={this.handlePostSelected.bind(this, post.id)}
+            // {...this.props}
           />
         );
       });
