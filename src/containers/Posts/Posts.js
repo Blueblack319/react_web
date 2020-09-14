@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import classes from "../Posts/Post.module.css";
+import "../Posts/Posts.module.css";
 
 import Post from "../../components/Post/Post";
 import axios from "../../axios";
@@ -48,7 +48,7 @@ class Posts extends Component {
         );
       });
     }
-    return <section className={classes.Posts}>{posts}</section>;
+    return <section className="Posts">{posts}</section>;
   }
 }
 
