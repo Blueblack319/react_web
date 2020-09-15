@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import "./NewPost.css";
 
 import axios from "axios";
-import { Redirect } from "react-router";
 
 class NewPost extends Component {
   state = {
@@ -32,7 +31,6 @@ class NewPost extends Component {
   };
 
   render() {
-    let redirect = null;
     return (
       <div className="NewPost">
         <h1>Add a Post</h1>

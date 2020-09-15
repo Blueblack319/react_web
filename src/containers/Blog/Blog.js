@@ -1,17 +1,18 @@
-import React, { Component } from "react";
-import { Route, NavLink, withRouter, Switch, Redirect } from "react-router-dom";
+import React, { Component, Suspense } from "react";
+import { Route, NavLink, withRouter, Switch } from "react-router-dom";
 
 import "./Blog.css";
 import Posts from "../Posts/Posts";
 // import NewPost from "../Posts/NewPost/NewPost";
-import asyncComponent from "../../hoc/asyncComponent";
+// import asyncComponent from "../../hoc/asyncComponent";
 
-const AsyncComponent = asyncComponent(() => import("../Posts/NewPost/NewPost"));
+// const AsyncComponent = asyncComponent(() => import("../Posts/NewPost/NewPost"));
+const NewPost = React.lazy(() => import("../Posts/NewPost/NewPost"));
 
 class Blog extends Component {
-  state = {
-    auth: true,
-  };
+  // state = {
+  //   auth: true,
+  // };
 
   render() {
     return (
@@ -21,7 +22,7 @@ class Blog extends Component {
             <ul>
               <li>
                 <NavLink
-                  to="/posts/"
+                  to="/posts"
                   exact
                   activeClassName="home-active"
                   activeStyle={{
@@ -48,10 +49,13 @@ class Blog extends Component {
           </nav>
         </header>
         <Switch>
-          {this.state.auth ? (
+          {/* {this.state.auth ? (
             <Route path="/new-post" exact component={AsyncComponent} />
-          ) : null}
+          ) : null} */}
           <Route path="/posts" component={Posts} />
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <Route path="/new-post" exact component={NewPost} />
+          </Suspense>
           <Route render={() => <h1>Not found</h1>} />
         </Switch>
       </div>
